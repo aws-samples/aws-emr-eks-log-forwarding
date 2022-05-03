@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: emr-eks-workshop-namespace
+  labels:
+    app: spark-executor
+spec:
+  containers:
+  - name: custom-side-car-container
+    image: amazon/aws-for-fluent-bit:latest
+    env:
+      - name: sidecar
+        value: spark-executor
+    volumeMounts:
+    - name: fluent-bit-sidecar-config
+      mountPath: /fluent-bit/etc/
+    - name: fluent-bit-sidecar-wrapper
+      mountPath: /scripts/
+    - name: emr-container-application-log-dir
+      mountPath: /var/log/spark/user
+    - name: emr-container-communicate
+      mountPath: /var/log/fluentd
+    command: ["/bin/sh", "-c", "/scripts/subprocess.sh & /scripts/wrapper.sh"]
+  volumes:
+  - name: fluent-bit-sidecar-config
+    configMap:
+      name: fluent-bit-sidecar-config
+  - name: fluent-bit-sidecar-wrapper
+    configMap:
+      name: fluent-bit-sidecar-wrapper
+      defaultMode: 484
+
