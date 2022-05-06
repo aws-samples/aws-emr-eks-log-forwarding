@@ -8,7 +8,7 @@ export ES_VERSION="OpenSearch_1.0"
 export ES_DOMAIN_USER="emreks"
 
 # OpenSearch Dashboards admin password
-export ES_DOMAIN_PASSWORD='JupiterHub123'
+export ES_DOMAIN_PASSWORD='< ADD YOUR PASSWORD >'
 
 
 # Download and update the template using the variables created previously
