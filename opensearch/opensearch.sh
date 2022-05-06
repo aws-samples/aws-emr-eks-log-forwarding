@@ -13,12 +13,16 @@ export ES_DOMAIN_USER="emreks"
 # OpenSearch Dashboards admin password
 export ES_DOMAIN_PASSWORD='< ADD YOUR PASSWORD >'
 
+# Region
+export REGION='< Set your region >'
 
-# Download and update the template using the variables created previously
-curl -sS https://raw.githubusercontent.com/aws-samples/aws-emr-eks-log-forwarding/main/opensearch/es_domain.json \
-  | envsubst > ~/temp/es_domain.json
+
+# Update the template using the variables created previously
+envsubst < es_domain.json > es_domain_values.json
+
+es_domain.json
 
 # Create the cluster
 aws opensearch create-domain \
-  --cli-input-json  file://~/temp/es_domain.json --region ${REGION}
-
+  --cli-input-json  file://es_domain_values.json --region ${REGION}
+  
