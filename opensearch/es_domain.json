@@ -2,7 +2,7 @@
     "DomainName": "${ES_DOMAIN_NAME}",
     "EngineVersion": "${ES_VERSION}",
     "ClusterConfig": {
-        "InstanceType": "r5.large.search",
+        "InstanceType": "${INSTANCE_TYPE}",
         "InstanceCount": 1,
             "DedicatedMasterEnabled": false,
             "ZoneAwarenessEnabled": false,
@@ -11,7 +11,7 @@
     "EBSOptions": {
         "EBSEnabled": true,
         "VolumeType": "gp2",
-        "VolumeSize": 100
+        "VolumeSize": 50
     },
     "AccessPolicies":  "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Action\":\"es:ESHttp*\",\"Resource\":\"arn:aws:es:${AWS_REGION}:${ACCOUNT_ID}:domain/${ES_DOMAIN_NAME}/*\"}]}",
     "SnapshotOptions": {},
