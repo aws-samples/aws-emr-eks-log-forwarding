@@ -20,8 +20,6 @@ export REGION='< Set your region >'
 # Update the template using the variables created previously
 envsubst < es_domain.json > es_domain_values.json
 
-es_domain.json
-
 # Create the cluster
 aws opensearch create-domain \
   --cli-input-json  file://es_domain_values.json --region ${REGION}
