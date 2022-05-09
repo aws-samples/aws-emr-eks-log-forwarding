@@ -19,7 +19,7 @@ data:
     @INCLUDE input-application.conf
     @INCLUDE input-event-logs.conf
     @INCLUDE output-splunk.conf
-    @INCLUDE output-elasticsearch.conf
+    @INCLUDE output-opensearch.conf
 
   input-application.conf: |
     [INPUT]
@@ -51,7 +51,7 @@ data:
         TLS.Verify      Off
         Splunk_Token    < Token from Splunk HTTP Event Collector >
 
-  output-elasticsearch.conf: |
+  output-opensearch.conf: |
     [OUTPUT]
         Name            es
         Match           *
