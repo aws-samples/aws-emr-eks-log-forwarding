@@ -45,23 +45,23 @@ data:
     [OUTPUT]
         Name            splunk
         Match           *
-        Host            ip-172-23-1-31.ec2.internal
+        Host            < Hostname of the Splunk EC2 instance >
         Port            8088
         TLS             On
         TLS.Verify      Off
-        Splunk_Token    57327d3a-5fe4-4089-a1a5-3be1d5ea8dee
+        Splunk_Token    < Token from Splunk HTTP Event Collector >
 
   output-elasticsearch.conf: |
     [OUTPUT]
         Name            es
         Match           *
-        Host            https://search-emreksanon-3mw7zb2yyuuwlktw4davtyav3u.us-east-1.es.amazonaws.com/
+        Host            < Hostname of the OpenSearch Domain >
         Port            443
         TLS             On
         AWS_Auth        Off
-        AWS_Region      us-east-1
-        HTTP_User       fluentbit
-        HTTP_Passwd     EmrLogs123?
+        AWS_Region      < region >
+        HTTP_User       < username >
+        HTTP_Passwd     < password >
         Retry_Limit     6
 
   parsers.conf: |
