@@ -28,6 +28,7 @@ Resources:
             - ec2:RevokeSecurityGroupIngress
             - s3:PutObject
             - s3:GetObject
+            - s3:DeleteObject
             - ec2:AuthorizeSecurityGroupEgress
             - ec2:AuthorizeSecurityGroupIngress
             - ec2:CreateSecurityGroup
