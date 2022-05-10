@@ -23,9 +23,15 @@ output_s3 = "s3://" + bucket_name + "/" + bucket_folder + "/" + output_prefix
 
 spark = SparkSession.builder.appName(app_name).getOrCreate()
 
+print("S3 bucket: " + bucket_name)
+print("Folder prefix: " + bucket_folder)
+print("Folder to be deleted: " + bucket_folder + "/" + output_prefix)
+
 s3 = boto3.resource('s3')
 bucket = s3.Bucket(bucket_name)
-bucket.objects.filter(Prefix=bucket_folder + "/" + output_prefix).delete()
+delete_response = bucket.objects.filter(Prefix=bucket_folder + "/" + output_prefix).delete()
+
+print(delete_response)
 
 #df = spark.read.option("header",True).csv("s3://tanmatth-emr-2/fluentbit/data/boston-property-assessment-2021.csv")
 df = spark.read.option("header",True).csv(input_s3)
