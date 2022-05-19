@@ -58,10 +58,8 @@ data:
         Host            < Hostname of the OpenSearch Domain >
         Port            443
         TLS             On
-        AWS_Auth        Off
+        AWS_Auth        On
         AWS_Region      < region >
-        HTTP_User       < username >
-        HTTP_Passwd     < password >
         Retry_Limit     6
 
   parsers.conf: |
