@@ -1,0 +1,97 @@
+{
+    "Version": "2012-10-17",  
+    "Statement": [    
+        {      
+            "Effect": "Allow",      
+            "Action": [
+                "s3:AbortMultipartUpload",
+                "s3:GetBucketLocation",
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:ListBucketMultipartUploads",
+                "s3:PutObject"
+            ],      
+            "Resource": [        
+                "arn:aws:s3:::bucket-name",
+                "arn:aws:s3:::bucket-name/*"		    
+            ]    
+        },
+        {
+           "Effect": "Allow",
+           "Action": [
+               "kms:Decrypt",
+               "kms:GenerateDataKey"
+           ],
+           "Resource": [
+               "arn:aws:kms:region:account-id:key/key-id"           
+           ],
+           "Condition": {
+               "StringEquals": {
+                   "kms:ViaService": "s3.region.amazonaws.com"
+               },
+               "StringLike": {
+                   "kms:EncryptionContext:aws:s3:arn": "arn:aws:s3:::bucket-name/prefix*"
+               }
+           }
+        },
+        {
+           "Effect": "Allow",
+           "Action": [
+               "es:DescribeDomain",
+               "es:DescribeDomains",
+               "es:DescribeDomainConfig",
+               "es:ESHttpPost",
+               "es:ESHttpPut"
+           ],
+          "Resource": [
+              "arn:aws:es:region:account-id:domain/domain-name",
+              "arn:aws:es:region:account-id:domain/domain-name/*"
+          ]
+       },
+       {
+          "Effect": "Allow",
+          "Action": [
+              "es:ESHttpGet"
+          ],
+          "Resource": [
+              "arn:aws:es:region:account-id:domain/domain-name/_all/_settings",
+              "arn:aws:es:region:account-id:domain/domain-name/_cluster/stats",
+              "arn:aws:es:region:account-id:domain/domain-name/index-name*/_mapping/type-name",
+              "arn:aws:es:region:account-id:domain/domain-name/_nodes",
+              "arn:aws:es:region:account-id:domain/domain-name/_nodes/stats",
+              "arn:aws:es:region:account-id:domain/domain-name/_nodes/*/stats",
+              "arn:aws:es:region:account-id:domain/domain-name/_stats",
+              "arn:aws:es:region:account-id:domain/domain-name/index-name*/_stats"
+          ]
+       },        
+       {
+          "Effect": "Allow",
+          "Action": [
+              "kinesis:DescribeStream",
+              "kinesis:GetShardIterator",
+              "kinesis:GetRecords",
+              "kinesis:ListShards"
+          ],
+          "Resource": "arn:aws:kinesis:region:account-id:stream/stream-name"
+       },
+       {
+          "Effect": "Allow",
+          "Action": [
+              "logs:PutLogEvents"
+          ],
+          "Resource": [
+              "arn:aws:logs:region:account-id:log-group:log-group-name:log-stream:log-stream-name"
+          ]
+       },
+       {
+          "Effect": "Allow", 
+          "Action": [
+              "lambda:InvokeFunction", 
+              "lambda:GetFunctionConfiguration" 
+          ],
+          "Resource": [
+              "arn:aws:lambda:region:account-id:function:function-name:function-version"
+          ]
+       }
+    ]
+}
