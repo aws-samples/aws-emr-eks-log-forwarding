@@ -62,6 +62,13 @@ data:
         AWS_Region      < region >
         Retry_Limit     6
 
+  output-kinesisfirehose.conf: |
+    [OUTPUT]
+        Name            kinesis_firehose
+        Match           *
+        region          < region >
+        delivery_stream < Kinesis Firehose Stream Name >
+
   parsers.conf: |
     [PARSER]
         Name   apache
