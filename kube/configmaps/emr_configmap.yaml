@@ -20,6 +20,7 @@ data:
     @INCLUDE input-event-logs.conf
     @INCLUDE output-splunk.conf
     @INCLUDE output-opensearch.conf
+    @INCLUDE output-kinesisfirehose.conf
 
   input-application.conf: |
     [INPUT]
