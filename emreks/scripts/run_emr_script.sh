@@ -37,7 +37,7 @@ aws emr-containers start-job-run \
 --name emreksdemo-job \
 --execution-role-arn ${EMR_EKS_EXECUTION_ARN} \
 --release-label ${EMR_RELEASE} \
---region us-east-2 \
+--region ${region} \
 --job-driver "{
     \"sparkSubmitJobDriver\": {
         \"entryPoint\": \"${SCRIPT_PATH}\",
