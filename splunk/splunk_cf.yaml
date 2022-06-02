@@ -51,7 +51,7 @@ Parameters:
     Description: "S3 bucket name where the Splunk install file is located"
     Type: String
   S3Prefix:
-    Description: "S3 prefix including the Spark RPM file"
+    Description: "S3 prefix including the Splunk RPM file"
     Type: String
   S3DownloadLocation:
     Description: "Local Download location of S3 files"
