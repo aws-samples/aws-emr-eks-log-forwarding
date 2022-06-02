@@ -22,7 +22,7 @@ ecruri=$(echo $repository | jq .repository.repositoryUri | sed 's/"//g')
 ecrhost=$(echo $ecruri | sed "s/\/${repository_name}//")
 
 ## Login to EMR image registry
-aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${registry}.dkr.ecr.${region}.amazonaws.com
+aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${registry}.dkr.ecr.${region}.amazonaws.com
 
 ## Build the image on the desktop
 docker build -t "${ecruri}:latest" .
