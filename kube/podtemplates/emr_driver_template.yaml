@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  namespace: emr-eks-workshop-namespace
+  namespace: sparkns
   labels:
     app: spark-driver
 spec:
