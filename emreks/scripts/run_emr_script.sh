@@ -1,8 +1,8 @@
 if [ $# -ne 3 ];
   then 
-    echo "There are insufficient parameters applied. Format: bash run_emr_script.sh <bucket name> <container image repository URI> <Script S3 Path>"
-    echo "NOTE: Script S3 Path is the S3 PREFIX. Start without a forward slash / unless your script is in the bucket root"
-    echo "bash run_emr_script.sh emreksdemo-123456 12345678990.dkr.ecr.us-east-2.amazonaws.com/emr-6.5.0-custom emreksdemo-123456/scripts/scriptname.py"
+    echo "There are insufficient parameters applied. Format: bash run_emr_script.sh <bucket name> <container image repository URI> <Script Path>"
+    echo "NOTE: Script Path. Please include protocol. Example: If script is in S3: it should be s3://<bucket name>/<prefix>"
+    echo "bash run_emr_script.sh emreksdemo-123456 12345678990.dkr.ecr.us-east-2.amazonaws.com/emr-6.5.0-custom s3://emreksdemo-123456/scripts/scriptname.py"
     exit 1
 fi
 
@@ -41,7 +41,7 @@ aws emr-containers start-job-run \
 --region ${region} \
 --job-driver "{
     \"sparkSubmitJobDriver\": {
-        \"entryPoint\": \"s3://${S3_BUCKET}/${SCRIPT_PATH}\",
+        \"entryPoint\": \"${SCRIPT_PATH}\",
         \"entryPointArguments\": [\"${APP_NAME}\", \"${S3_BUCKET}\",\"${S3_FOLDER}\"],
         \"sparkSubmitParameters\": \"--conf spark.executor.instances=1 --conf spark.executor.memory=4G --conf spark.executor.cores=2 --conf spark.driver.cores=1\"
         }
