@@ -40,7 +40,7 @@ aws emr-containers start-job-run \
 --region ${region} \
 --job-driver "{
     \"sparkSubmitJobDriver\": {
-        \"entryPoint\": \"${SCRIPT_PATH}\",
+        \"entryPoint\": \"s3://${SCRIPT_PATH}\",
         \"entryPointArguments\": [\"${APP_NAME}\", \"${S3_BUCKET}\",\"${S3_FOLDER}\"],
         \"sparkSubmitParameters\": \"--conf spark.executor.instances=1 --conf spark.executor.memory=4G --conf spark.executor.cores=2 --conf spark.driver.cores=1\"
         }
