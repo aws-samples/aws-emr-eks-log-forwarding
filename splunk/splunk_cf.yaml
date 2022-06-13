@@ -97,8 +97,13 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Enable SSH access via port 22 and allow ALB to connect to port 80 on the instance
+      SecurityGroupEgress:
+      - Description: Allow all outbound traffic
+        IpProtocol: -1
+        CidrIp: 0.0.0.0/0
       SecurityGroupIngress:
-      - IpProtocol: tcp
+      - Description: Allow 22 and 8000
+        IpProtocol: tcp
         FromPort: 22
         ToPort: 22
         CidrIp: !Ref SSHLocation
