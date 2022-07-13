@@ -1,6 +1,9 @@
-## My Project
+# Stream Amazon EMR on EKS logs to third-party providers 
 
-TODO: Fill this README out!
+## Introduction
+This solution uses pod templates to create a sidecar container alongside the Spark job pods. The sidecar containers are able to access the logs contained in the Spark pods and forward these logs to the log aggregator. This approach allows the logs to be managed separately from the EKS cluster and uses a small amount of resources because the sidecar container is only launched during the lifetime of the Spark job.
+
+
 
 Be sure to:
 
