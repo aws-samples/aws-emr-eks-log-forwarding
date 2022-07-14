@@ -71,13 +71,9 @@ bash run_emr_script.sh < S3 bucket name > < ECR container image > < script path>
 Example: bash run_emr_script.sh emreksdemo-123456 12345678990.dkr.ecr.us-east-2.amazonaws.com/emr-6.5.0-custom s3://emreksdemo-123456/scripts/scriptname.py
 ```
 
-
-
-
-
 ## Security
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+See [CONTRIBUTING GUIDELINES](CONTRIBUTING.md#security-issue-notifications) for more information.
 
 ## License
 
