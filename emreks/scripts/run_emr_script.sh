@@ -13,18 +13,14 @@ region=$(curl -s http://169.254.169.254/latest/meta-data/placement/region)
 EMR_EKS_CLUSTER_ID=$(aws cloudformation describe-stack-resource --stack-name "${cf_virtclustername}" --region ${region} --logical-resource-id "EMRVirtualCluster" | jq .StackResourceDetail.PhysicalResourceId | sed 's/"//g')
 
 
-#aws cloudformation describe-stack-resource --stack-name "${cf_iam_stackname}" --region ${region} --logical-resource-id "JobExecutionRole"
 IAMROLE=$(aws cloudformation describe-stack-resource --stack-name "${cf_iam_stackname}" --region ${region} --logical-resource-id "JobExecutionRole" | jq .StackResourceDetail.PhysicalResourceId | sed 's/"//g')
 
 EMR_EKS_EXECUTION_ARN=$(aws iam get-role --role-name $IAMROLE --region ${region} | jq .Role.Arn | sed 's/"//g')
 
 
-#EMR_EKS_CLUSTER_ID=8i09qi6s51rk14ji8yubnaui8
-#EMR_EKS_EXECUTION_ARN=arn:aws:iam::271827187062:role/EMR_EKS_Job_Execution_Role
 EMR_RELEASE=emr-6.5.0-latest
 S3_BUCKET=$1
 S3_FOLDER=logforward
-#CONTAINER_IMAGE=271827187062.dkr.ecr.us-east-2.amazonaws.com/emr-6.5.0-custom
 CONTAINER_IMAGE=$2
 SCRIPT_PATH=$3
 APP_NAME="emreksdemo"
