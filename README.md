@@ -41,13 +41,39 @@ Default S3 bucket name for EMR on EKS (do not add s3://): < bucket name >
 Bucket created: XXXXXXXXXXX ...
 Deploying CloudFormation stack with the following parameters...
 Region: xx-xxxx-x | Account ID: xxxxxxxxxxxx | S3 Bucket: XXXXXXXXXXX
+
+...
+
+EKS Cluster and Virtual EMR Cluster have been installed.
+```
+
+## Configure the Fluent Bit sidecar container
+We need to write two configuration files to configure a Fluent Bit sidecar container. The first is the Fluent Bit configuration itself, and the second is the Fluent Bit sidecar subprocess configuration that makes sure that the sidecar operation ends when the main Spark job ends. The suggested configuration provided in the configuration file here is for Splunk and Amazon OpenSearch Service. However, you can configure Fluent Bit with other third-party log aggregators. For more information about configuring outputs, refer to [Outputs](https://docs.fluentbit.io/manual/pipeline/outputs).
+
+### Fluent Bit ConfigMap
+
+Modify the [emr_configmap.yaml](https://github.com/aws-samples/aws-emr-eks-log-forwarding/blob/main/kube/configmaps/emr_configmap.yaml) according to your environment. Do not make changes to [emr_entrypoint_configmap.yaml](https://github.com/aws-samples/aws-emr-eks-log-forwarding/blob/main/kube/configmaps/emr_entrypoint_configmap.yaml). Then run the following commands to add the configmaps:
+
+```
+kubectl apply -f emr_configmap.yaml
+kubectl apply -f emr_entrypoint_configmap.yaml
+```
+
+## Prepare pod templates for Spark jobs
+Copy the [two pod template yaml files](https://github.com/aws-samples/aws-emr-eks-log-forwarding/tree/main/kube/podtemplates) to an S3 location
+
+## Submitting a Spark job with Fluent Bit sidecar container
+
+```
+cd emreks/scripts
+bash run_emr_script.sh < S3 bucket name > < ECR container image > < script path>
+
+Example: bash run_emr_script.sh emreksdemo-123456 12345678990.dkr.ecr.us-east-2.amazonaws.com/emr-6.5.0-custom s3://emreksdemo-123456/scripts/scriptname.py
 ```
 
 
-Be sure to:
 
-* Change the title in this README
-* Edit your repository description on GitHub
+
 
 ## Security
 
